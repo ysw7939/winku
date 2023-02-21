@@ -36,7 +36,7 @@ public class UserController {
         return "user/landing";
     }
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String getRegister(Model model) {
         model.addAttribute("register", new RegisterDto());
 
@@ -69,7 +69,7 @@ public class UserController {
             return "user/register";
         }
 
-        Optional<User> user = userService.findUserById(registerDto.getLoginId());
+        Optional<User> user = userService.findUserByLoginId(registerDto.getLoginId());
         if (user.isPresent()) {
             bindingResult.reject("alreadyExistId");
             model.addAttribute("user", new SignInDto());
