@@ -3,6 +3,7 @@ package com.example.winku.dto.feed;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter @Setter
 public class CreateFeedDto {
@@ -10,13 +11,12 @@ public class CreateFeedDto {
     private String profile;
     @NotBlank
     private String content;
-    private String imgPath;
-
+    private MultipartFile imgPath;
 
     public CreateFeedDto() {
     }
 
-    public CreateFeedDto(String name, String profile, String content, String imgPath) {
+    public CreateFeedDto(String name, String profile, String content, MultipartFile imgPath) {
         this.name = name;
         this.profile = profile;
         this.content = content;
