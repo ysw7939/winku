@@ -1,8 +1,12 @@
 package com.example.winku.repository.user;
 
 import com.example.winku.domain.user.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,11 +14,22 @@ import java.util.UUID;
 
 @Repository
 public class MemoryUserRepository implements UserRepository {
+    @Value("${file.dir}")
+    private String fileDir;
+
     private static final Map<String, User> store = new HashMap<>();
+
+    private String storeFile(MultipartFile multipartFile) throws IOException {
+        String fullPath = fileDir + multipartFile.getOriginalFilename();
+        File file = new File(fullPath);
+        multipartFile.transferTo(file);
+        return multipartFile.getOriginalFilename();
+    }
     @Override
     public User save(User user) {
         UUID uuid = UUID.randomUUID();
         user.setId(uuid.toString());
+        user.setProfileImg("/images/resources/user.png");
         return store.put(user.getId(), user);
     }
 

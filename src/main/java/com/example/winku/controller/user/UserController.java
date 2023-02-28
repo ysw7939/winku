@@ -87,4 +87,6 @@ public class UserController {
     public void init() {
         userService.signUp(new User("test", "test", "test", "test@naver.com", "Male"));
     }
+
+
 }

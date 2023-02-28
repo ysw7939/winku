@@ -9,17 +9,17 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 public class User {
     private String id;
-    @NotBlank
     private String name;
-    @NotBlank
-    @Length(min = 8)
+
     private String password;
-    @NotBlank
+
     private String loginId;
-    @NotBlank
+
     private String email;
-    @NotBlank
+
     private String  gender;
+
+    private String profileImg;
 
     public User() {
     }

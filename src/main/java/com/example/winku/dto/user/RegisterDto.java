@@ -17,6 +17,7 @@ public class RegisterDto {
     @NotBlank
     private String email;
 
+
     public RegisterDto() {
     }
 
