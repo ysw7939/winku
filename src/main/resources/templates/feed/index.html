@@ -575,14 +575,14 @@
 															<i class="fa fa-music"></i>
 															<label class="fileContainer">
 																<input type="file">
-																<input type="hidden" th:name="name" th:value="양수원">
+																<input type="hidden" th:name="name" th:value="${session.user.name}">
 															</label>
 														</li>
 														<li>
 															<i class="fa fa-image"></i>
 															<label class="fileContainer">
 																<input type="file">
-																<input type="hidden" th:name="profile" value="/images/resources/friend-avatar10.jpg">
+																<input type="hidden" th:name="profile" th:value="${session.user.profileImg}">
 																<input type="hidden" th:name="imgPath" value="/images/resources/user-post.jpg">
 															</label>
 														</li>
@@ -724,9 +724,9 @@
 																	<div class="add-smiles">
 																		<button class="comment-button" type="submit">send</button>
 																	</div>
-																	<input type="hidden" th:name="userName" value="홍길동">
+																	<input type="hidden" th:name="userName" th:value="${session.user.name}">
 																	<input type="hidden" th:name="feedId" th:value="${feed.id}">
-																	<input type="hidden" th:name="profile" value="/images/resources/friend-avatar9.jpg">
+																	<input type="hidden" th:name="profile" th:value="${session.user.profileImg}">
 																	<input type="hidden" th:name="commentId" th:value="${comment.id}">
 																</form>
 															</div>
@@ -794,9 +794,9 @@
 															<div class="add-smiles">
 																<button class="comment-button" type="submit">send</button>
 															</div>
-															<input type="hidden" th:name="userName" value="홍길동">
+															<input type="hidden" th:name="userName" th:value="${session.user.name}">
 															<input type="hidden" th:name="feedId" th:value="${feed.id}">
-															<input type="hidden" th:name="profile" value="/images/resources/friend-avatar9.jpg">
+															<input type="hidden" th:name="profile" th:value="${session.user.profileImg}">
 <!--															<div class="smiles-bunch">-->
 <!--																<i class="em em-&#45;&#45;1"></i>-->
 <!--																<i class="em em-smiley"></i>-->
