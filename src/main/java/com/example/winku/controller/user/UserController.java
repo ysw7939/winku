@@ -57,7 +57,7 @@ public class UserController {
             return "user/landing";
         }
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(); // 세션이 있다면 해당 세션을 리턴 없다면 새로 발행
         session.setAttribute("user", user.get());
         return "redirect:/feed/index";
     }
@@ -81,6 +81,15 @@ public class UserController {
 
         return "redirect:/user/landing";
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false); // 세션이 있다면 해당 세션을 리턴 없다면 새로 발행 - false로
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/user/landing";
     }
 
     @PostConstruct
