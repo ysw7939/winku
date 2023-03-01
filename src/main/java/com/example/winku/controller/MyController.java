@@ -20,7 +20,7 @@ public class MyController {
         model.addAttribute("name", "suwon");
         return "inbox";
     }
-    @ResponseBody
+    @ResponseBody // html소스파일이 아닌 일반 데이터로
     @GetMapping("/media/{filename}")
     public Resource getMedia(@PathVariable String filename) throws MalformedURLException {
         String fullPath = fileDir + filename;

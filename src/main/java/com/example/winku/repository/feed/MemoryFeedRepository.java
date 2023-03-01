@@ -45,11 +45,14 @@ public class MemoryFeedRepository implements FeedRepository {
         Feed saveFeed = new Feed();
 
         String imgPath = null;
-        try {
-            imgPath = storeFile(feedDto.getImgPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if ( !feedDto.getImgPath().isEmpty()) {
+            try {
+                imgPath = storeFile(feedDto.getImgPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
 
         saveFeed.setId(++sequence);
         saveFeed.setDate(date);

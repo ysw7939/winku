@@ -20,8 +20,8 @@ public class MemoryFeedRepositoryTest {
     @Test
     void save() {
         //given
-        Feed feed1 = new Feed("양수원", "/images/resources/friend-avatar10.jpg","/images/resources/user-post.jpg","내용들 입니다.");
-        Feed feed2 = new Feed("양수원", "/images/resources/friend-avatar10.jpg", "/images/resources/user-post.jpg", "내용들 입니다.");
+        Feed feed1 = new Feed("test","양수원", "/images/resources/friend-avatar10.jpg","/images/resources/user-post.jpg","내용들 입니다.");
+        Feed feed2 = new Feed("test","양수원", "/images/resources/friend-avatar10.jpg", "/images/resources/user-post.jpg", "내용들 입니다.");
 
         //situation
         memoryFeedRepository.save(feed1);

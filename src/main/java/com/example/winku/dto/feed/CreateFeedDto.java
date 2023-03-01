@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-@Getter @Setter
+@Getter
+@Setter
 public class CreateFeedDto {
+    private String loginId;
     private String name;
     private String profile;
     @NotBlank
@@ -16,7 +18,8 @@ public class CreateFeedDto {
     public CreateFeedDto() {
     }
 
-    public CreateFeedDto(String name, String profile, String content, MultipartFile imgPath) {
+    public CreateFeedDto(String loginId, String name, String profile, String content, MultipartFile imgPath) {
+        this.loginId = loginId;
         this.name = name;
         this.profile = profile;
         this.content = content;

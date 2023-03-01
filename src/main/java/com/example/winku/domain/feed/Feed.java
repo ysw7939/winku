@@ -10,6 +10,7 @@ import java.util.List;
 @Getter @Setter
 public class Feed {
     private long id;
+    private String loginId;
     private Date date;
     private String name;
     private String profile;
@@ -25,11 +26,11 @@ public class Feed {
     public Feed() {
     }
 
-    public Feed(String name, String profile, String imgPath, String content) {
+    public Feed(String loginId, String name, String profile, String imgPath, String content) {
+        this.loginId = loginId;
         this.name = name;
         this.profile = profile;
         this.imgPath = imgPath;
         this.content = content;
     }
-
 }
