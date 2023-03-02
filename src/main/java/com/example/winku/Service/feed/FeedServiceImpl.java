@@ -59,4 +59,9 @@ public class FeedServiceImpl implements FeedService {
         }
         feedRepository.deleteFeed(feedDto);
     }
+
+    @Override
+    public List<Feed> findAllbyLoginId(String loginId) {
+        return feedRepository.findAllbyLoginId(loginId);
+    }
 }

@@ -19,4 +19,6 @@ public interface FeedRepository {
     List<ReadFeedDto> injectFeedIntoDto();
 
     void deleteFeed(DeleteFeedDto feedDto);
+
+    List<Feed> findAllbyLoginId(String loginId);
 }

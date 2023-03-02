@@ -57,6 +57,7 @@ public class MemoryFeedRepository implements FeedRepository {
         saveFeed.setId(++sequence);
         saveFeed.setDate(date);
         saveFeed.setName(feedDto.getName());
+        saveFeed.setLoginId(feedDto.getLoginId());
         saveFeed.setContent(feedDto.getContent());
         saveFeed.setProfile(feedDto.getProfile());
         saveFeed.setImgPath(imgPath);
@@ -67,6 +68,8 @@ public class MemoryFeedRepository implements FeedRepository {
     public List<Feed> findAll() {
         return new ArrayList<>(store.values());
     }
+
+
 
     @Override
     public List<ReadFeedDto> injectFeedIntoDto() {
@@ -83,6 +86,18 @@ public class MemoryFeedRepository implements FeedRepository {
     @Override
     public void deleteFeed(DeleteFeedDto feedDto) {
         store.remove(feedDto.getId());
+    }
+
+    @Override
+    public List<Feed> findAllbyLoginId(String loginId) {
+        List<Feed> feedStoreList = new ArrayList<>(store.values());
+        List<Feed> feedList = new ArrayList<>();
+        for (Feed feed : feedStoreList) {
+            if (feed.getLoginId().equals(loginId)) {
+                feedList.add(feed);
+            }
+        }
+        return feedList;
     }
 
     @Override

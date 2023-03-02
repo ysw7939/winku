@@ -6,6 +6,7 @@ import com.example.winku.Service.recomment.RecommentServiceImpl;
 import com.example.winku.domain.comment.Comment;
 import com.example.winku.domain.comment.Recomment;
 import com.example.winku.domain.feed.Feed;
+import com.example.winku.domain.user.User;
 import com.example.winku.dto.comment.CreateCommentDto;
 import com.example.winku.dto.comment.DeleteCommentDto;
 import com.example.winku.dto.feed.CreateFeedDto;
@@ -13,14 +14,17 @@ import com.example.winku.dto.feed.DeleteFeedDto;
 import com.example.winku.dto.recomment.CreateRecommentDto;
 import com.example.winku.dto.recomment.DeleteRecommentDto;
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FeedController {
@@ -78,6 +82,18 @@ public class FeedController {
     public String RecommentDelete(@ModelAttribute DeleteRecommentDto recommentDto) {
         recommentService.deleteRecomment(recommentDto);
         return "redirect:/feed/index";
+    }
+
+    @GetMapping("/feed/{loginId}/mypage/")
+    public String Mylist(@PathVariable String loginId, @SessionAttribute(name = "user") User user, Model model) {
+        List<Feed> feeds = feedService.findAllbyLoginId(loginId);
+        if (!loginId.equals(user.getLoginId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+        model.addAttribute("myfeed", feeds);
+        return "feed/time-line";
+
+
     }
 
     @PostConstruct
