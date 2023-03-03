@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -30,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/landing")
-    public String getSignIn(Model model) {
+    public String getSignIn(@RequestParam String redirect, Model model) {
         model.addAttribute("user", new SignInDto());
-
+        model.addAttribute("redirect", redirect);
         return "user/landing";
     }
 
@@ -44,9 +41,10 @@ public class UserController {
     }
 
     @PostMapping("/landing")
-    public String postSingIn(@Validated @ModelAttribute("user") SignInDto signInDto,
+    public String postSingIn(@Validated @ModelAttribute("user") SignInDto signInDto, @RequestParam String redirect,
                              BindingResult bindingResult,
                              HttpServletRequest request) {
+
         if (bindingResult.hasErrors()) {
             return "user/landing";
         }
@@ -59,7 +57,9 @@ public class UserController {
 
         HttpSession session = request.getSession(); // 세션이 있다면 해당 세션을 리턴 없다면 새로 발행
         session.setAttribute("user", user.get());
-        return "redirect:/feed/index";
+
+
+        return "redirect:" + redirect;
     }
 
     @PostMapping("/register")

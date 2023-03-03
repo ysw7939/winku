@@ -36,7 +36,6 @@ public class MyController {
     @GetMapping("/media/resources/{filename}")
     public Resource getImg(@PathVariable String filename) throws MalformedURLException {
         String fullPath = fileRepository + filename;
-        System.out.println(fullPath);
         return new UrlResource("file:" + fullPath);
     }
 

@@ -22,6 +22,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthInterceptor())
                 .order(1) //가장먼저 실행될 우선순위
-                .addPathPatterns("/feed/index", "feed/*/mypage");
+                .addPathPatterns("/feed/index", "/feed/*/mypage");
     }
 }

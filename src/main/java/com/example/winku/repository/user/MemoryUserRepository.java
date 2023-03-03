@@ -29,7 +29,7 @@ public class MemoryUserRepository implements UserRepository {
     public User save(User user) {
         UUID uuid = UUID.randomUUID();
         user.setId(uuid.toString());
-        user.setProfileImg("/images/resources/user.png");
+        user.setProfileImg("user.png");
         return store.put(user.getId(), user);
     }
 

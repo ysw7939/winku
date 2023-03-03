@@ -14,6 +14,9 @@ import com.example.winku.dto.feed.DeleteFeedDto;
 import com.example.winku.dto.recomment.CreateRecommentDto;
 import com.example.winku.dto.recomment.DeleteRecommentDto;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,11 +49,14 @@ public class FeedController {
     }
 
     @PostMapping("/feed/writeFeed")
-    public String feedWrite(@Validated @ModelAttribute CreateFeedDto feedDto, BindingResult bindingResult, Model model) {
+    public String feedWrite(@Validated @ModelAttribute CreateFeedDto feedDto, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println(request.getRequestURL());
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("feeds", feedService.combineReadFeedDto());
             return "feed/index";
         }
+
         feedService.createFeed(feedDto);
         return "redirect:/feed/index";
     }
@@ -81,10 +87,11 @@ public class FeedController {
     @PostMapping("/feed/deleteRecomment")
     public String RecommentDelete(@ModelAttribute DeleteRecommentDto recommentDto) {
         recommentService.deleteRecomment(recommentDto);
+        System.out.println();
         return "redirect:/feed/index";
     }
 
-    @GetMapping("/feed/{loginId}/mypage/")
+    @GetMapping("/feed/{loginId}/mypage")
     public String Mylist(@PathVariable String loginId, @SessionAttribute(name = "user") User user, Model model) {
         List<Feed> feeds = feedService.findAllbyLoginId(loginId);
         if (!loginId.equals(user.getLoginId())) {
@@ -98,8 +105,8 @@ public class FeedController {
 
     @PostConstruct
     public void init() {
-        feedService.saveFeed(new Feed("test","양수원", "/images/resources/friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
-        feedService.saveFeed(new Feed("test","양수원", "/images/resources/friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
+        feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
+        feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
         commentService.saveComment(new Comment(1L, "Su Won", "내용", "/images/resources/friend-avatar10.jpg"));
         commentService.saveComment(new Comment(1L, "Su Wan", "내용", "/images/resources/friend-avatar10.jpg"));
         commentService.saveComment(new Comment(1L, "Su Wan", "내용", "/images/resources/friend-avatar10.jpg"));
