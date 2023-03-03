@@ -17,7 +17,7 @@ import java.util.*;
 @Repository
 public class MemoryFeedRepository implements FeedRepository {
 
-    @Value("${file.dir}")
+    @Value("${file.repository}")
     private String fileDir;
 
     public static final Map<Long, Feed> store = new HashMap<>();

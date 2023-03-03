@@ -684,19 +684,13 @@
 													<span th:if="${#dates.hour(feed.date) < 12}" th:text="'published: ' + ${#calendars.format(feed.date, 'MMMM, dd yyyy HH')} +':AM' " >published: june,2 2018 19:PM</span>
 													<span th:if="${#dates.hour(feed.date) >= 12}" th:text="'published: '+ ${#calendars.format(feed.date, 'MMMM, dd yyyy HH')} +':PM' " >published: june,2 2018 19:PM</span>
 												</div>
-												<div class="description">
 
-														<p th:text="${feed.content}">
-															World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
-														</p>
-													</div>
 												<div class="post-meta">
 													<th:block th:if="${feed.imgPath != null}">
-														<img   th:src="|/media/${feed.getImgPath()}|" >
+														<img   th:src="|/media/resources/${feed.getImgPath()}|" >
 													</th:block>
 													<div class="we-video-info">
 														<ul>
-															
 															<li>
 																<span class="views" data-toggle="tooltip" title="views">
 																	<i class="fa fa-eye"></i>
@@ -755,6 +749,12 @@
 																</div>
 															</li>
 														</ul>
+													</div>
+													<div class="description">
+
+														<p th:text="${feed.content}">
+															World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
+														</p>
 													</div>
 												</div>
 											</div>
