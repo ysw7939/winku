@@ -49,16 +49,16 @@ public class FeedController {
     }
 
     @PostMapping("/feed/writeFeed")
-    public String feedWrite(@Validated @ModelAttribute CreateFeedDto feedDto, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String feedWrite(@Validated @ModelAttribute CreateFeedDto feedDto,@RequestParam String redirect, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
         System.out.println(request.getRequestURL());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("feeds", feedService.combineReadFeedDto());
-            return "feed/index";
+            return redirect;
         }
 
         feedService.createFeed(feedDto);
-        return "redirect:/feed/index";
+        return "redirect:" + redirect;
     }
 
     @PostMapping("/feed/writeComment")
@@ -98,6 +98,7 @@ public class FeedController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
         model.addAttribute("myfeed", feeds);
+        model.addAttribute("createFeedDto", new Feed());
         return "feed/time-line";
 
 
