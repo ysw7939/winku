@@ -4,6 +4,7 @@ import com.example.winku.Service.user.UserService;
 import com.example.winku.domain.user.User;
 import com.example.winku.dto.user.RegisterDto;
 import com.example.winku.dto.user.SignInDto;
+import jakarta.annotation.Nullable;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/landing")
-    public String getSignIn(@RequestParam String redirect, Model model) {
+    public String getSignIn(@RequestParam @Nullable String redirect, Model model) {
         model.addAttribute("user", new SignInDto());
         model.addAttribute("redirect", redirect);
         return "user/landing";
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/landing")
-    public String postSingIn(@Validated @ModelAttribute("user") SignInDto signInDto, @RequestParam String redirect,
+    public String postSingIn(@Validated @ModelAttribute("user") SignInDto signInDto, @RequestParam(defaultValue = "/feed/index") String redirect,
                              BindingResult bindingResult,
                              HttpServletRequest request) {
 
