@@ -52,5 +52,10 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteComment(commentDto);
     }
 
+    @Override
+    public Comment findbyCommentId(long commentid) {
+        return commentRepository.findCommentId(commentid);
+    }
+
 
 }

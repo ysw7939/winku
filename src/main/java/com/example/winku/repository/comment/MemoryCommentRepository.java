@@ -60,4 +60,11 @@ public class MemoryCommentRepository implements CommentRepository{
     public void deleteComment(DeleteCommentDto commentDto) {
         store.remove(commentDto.getId());
     }
+
+    @Override
+    public Comment findCommentId(Long commentId) {
+        Comment comment = store.get(commentId);
+        return comment;
+    }
+
 }

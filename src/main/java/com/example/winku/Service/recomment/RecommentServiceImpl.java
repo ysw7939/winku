@@ -45,4 +45,9 @@ public class RecommentServiceImpl implements RecommentService {
     public void deleteRecomment(DeleteRecommentDto recommentDto) {
         recommentRepository.deleteRecomment(recommentDto);
     }
+
+    @Override
+    public Recomment findbyRecommentId(long recommentId) {
+        return recommentRepository.recommentId(recommentId);
+    }
 }

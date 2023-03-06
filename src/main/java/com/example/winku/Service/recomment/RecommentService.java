@@ -16,4 +16,6 @@ public interface RecommentService {
     void deleteRecommentList(List<Recomment> recommentList);
 
     void deleteRecomment(DeleteRecommentDto recommentDto);
+
+    Recomment findbyRecommentId(long recommentId);
 }

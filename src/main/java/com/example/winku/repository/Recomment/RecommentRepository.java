@@ -16,5 +16,6 @@ public interface RecommentRepository {
 
     void deleteRecomment(DeleteRecommentDto recommentDto);
 
+    Recomment recommentId(long recommentId);
 
 }

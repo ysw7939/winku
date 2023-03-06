@@ -12,4 +12,6 @@ public interface CommentService {
 
     Comment createComment(CreateCommentDto commentDto);
     void deleteComment(DeleteCommentDto commentDto);
+
+    Comment findbyCommentId(long commentid);
 }

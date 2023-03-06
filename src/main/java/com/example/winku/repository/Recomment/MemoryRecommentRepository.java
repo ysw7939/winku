@@ -61,7 +61,11 @@ public class MemoryRecommentRepository implements RecommentRepository{
         store.remove(recommentDto.getId());
     }
 
-
+    @Override
+    public Recomment recommentId(long recommentId) {
+        Recomment recomment = store.get(recommentId);
+        return recomment;
+    }
 
 
 }
