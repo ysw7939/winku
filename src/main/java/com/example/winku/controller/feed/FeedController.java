@@ -11,6 +11,7 @@ import com.example.winku.dto.comment.CreateCommentDto;
 import com.example.winku.dto.comment.DeleteCommentDto;
 import com.example.winku.dto.feed.CreateFeedDto;
 import com.example.winku.dto.feed.DeleteFeedDto;
+import com.example.winku.dto.feed.ReadFeedDto;
 import com.example.winku.dto.recomment.CreateRecommentDto;
 import com.example.winku.dto.recomment.DeleteRecommentDto;
 import jakarta.annotation.PostConstruct;
@@ -60,17 +61,7 @@ public class FeedController {
         return "redirect:" + redirect;
     }
 
-    @PostMapping("/feed/writeComment")
-    public String commentWrite(@ModelAttribute CreateCommentDto commentDto) {
-        commentService.createComment(commentDto);
-        return "redirect:/feed/index";
-    }
 
-    @PostMapping("/feed/writeRecomment")
-    public String RecommentWrite(@ModelAttribute CreateRecommentDto recommentDto) {
-        recommentService.createRecomment(recommentDto);
-        return "redirect:/feed/index";
-    }
 
     @PostMapping("/feed/deleteFeed")
     public String feedDelete(@ModelAttribute DeleteFeedDto feedDto, @SessionAttribute(name = "user") User user, @RequestParam String redirect) {
@@ -81,21 +72,11 @@ public class FeedController {
         return "redirect:" + redirect;
     }
 
-    @PostMapping("/feed/deleteComment")
-    public String CommentDelete(@ModelAttribute DeleteCommentDto commentDto) {
-        commentService.deleteComment(commentDto);
-        return "redirect:/feed/index";
-    }
-    @PostMapping("/feed/deleteRecomment")
-    public String RecommentDelete(@ModelAttribute DeleteRecommentDto recommentDto) {
-        recommentService.deleteRecomment(recommentDto);
 
-        return "redirect:/feed/index";
-    }
 
     @GetMapping("/feed/{loginId}/mypage")
     public String Mylist(@PathVariable String loginId, @SessionAttribute(name = "user") User user, Model model) {
-        List<Feed> feeds = feedService.findAllbyLoginId(loginId);
+        List<ReadFeedDto> feeds = feedService.findAllbyLoginId(loginId);
         if (!loginId.equals(user.getLoginId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
@@ -110,15 +91,15 @@ public class FeedController {
     public void init() {
         feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
         feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
-        commentService.saveComment(new Comment(1L, "Su Won", "내용", "/images/resources/friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(1L, "Su Wan", "내용", "/images/resources/friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(1L, "Su Wan", "내용", "/images/resources/friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(2L, "Su Wbn", "내용", "/images/resources/friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(2L, "Su Wdn", "내용", "/images/resources/friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(1L, "대댓글 내용입니다!!!!!!!!!", "양수원", "/images/resources/friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(1L, "대댓글 내용입니다!!!!!!!!!", "양수원", "/images/resources/friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(2L, "대댓글 내용입니다!!!!!!!!!", "양수원", "/images/resources/friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(3L, "대댓글 내용입니다!!!!!!!!!", "양수원", "/images/resources/friend-avatar10.jpg"));
+        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
+        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
+        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
+        commentService.saveComment(new Comment(2L, "test","양수원", "내용", "friend-avatar10.jpg"));
+        commentService.saveComment(new Comment(2L, "test","양수원", "내용", "friend-avatar10.jpg"));
+        recommentService.saveRecomment(new Recomment(1L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
+        recommentService.saveRecomment(new Recomment(1L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
+        recommentService.saveRecomment(new Recomment(2L, "test","대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
+        recommentService.saveRecomment(new Recomment(3L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
     }
 
 

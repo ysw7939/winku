@@ -48,7 +48,7 @@ public class MemoryRecommentRepository implements RecommentRepository{
 
     @Override
     public Recomment createRecomment(CreateRecommentDto recommentDto) {
-        Recomment recomment = new Recomment(recommentDto.getCommentId(), recommentDto.getContent(), recommentDto.getUserName(), recommentDto.getProfile());
+        Recomment recomment = new Recomment(recommentDto.getCommentId(),recommentDto.getLoginId(), recommentDto.getContent(), recommentDto.getUserName(), recommentDto.getProfile());
         recomment.setId(++sequence);
         recomment.setDate(date);
         store.put(recomment.getId(), recomment);

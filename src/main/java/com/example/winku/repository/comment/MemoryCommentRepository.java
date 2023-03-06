@@ -49,7 +49,7 @@ public class MemoryCommentRepository implements CommentRepository{
 
     @Override
     public Comment createComment(CreateCommentDto commentDto) {
-        Comment comment = new Comment(commentDto.getFeedId(), commentDto.getUserName(), commentDto.getContent(), commentDto.getProfile());
+        Comment comment = new Comment(commentDto.getFeedId(),commentDto.getLoginId(), commentDto.getUserName(), commentDto.getContent(), commentDto.getProfile());
         comment.setId(++sequence);
         comment.setDate(date);
         store.put(comment.getId(), comment);

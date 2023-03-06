@@ -9,6 +9,7 @@ import java.util.Date;
 @Getter @Setter
 public class CreateRecommentDto {
     private long commentId;
+    private String loginId;
     @NotBlank
     private String content;
     private String userName;
@@ -17,8 +18,9 @@ public class CreateRecommentDto {
     public CreateRecommentDto() {
     }
 
-    public CreateRecommentDto(long commentId, String content, String userName, String profile) {
+    public CreateRecommentDto(long commentId,String loginId, String content, String userName, String profile) {
         this.commentId = commentId;
+        this.loginId = loginId;
         this.content = content;
         this.userName = userName;
         this.profile = profile;

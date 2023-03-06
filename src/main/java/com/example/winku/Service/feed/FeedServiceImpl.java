@@ -61,8 +61,13 @@ public class FeedServiceImpl implements FeedService {
     }
 
     @Override
-    public List<Feed> findAllbyLoginId(String loginId) {
-        return feedRepository.findAllbyLoginId(loginId);
+    public List<ReadFeedDto> findAllbyLoginId(String loginId) {
+        List<ReadFeedDto> dtoList = feedRepository.findAllbyLoginId(loginId);
+
+        for (ReadFeedDto readFeedDto : dtoList) {
+            readFeedDto.setCommentList(commentService.findAllbyFeedId(readFeedDto.getId()));
+        }
+        return dtoList;
     }
 
     @Override

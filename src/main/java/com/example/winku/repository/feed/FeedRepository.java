@@ -20,7 +20,7 @@ public interface FeedRepository {
 
     void deleteFeed(DeleteFeedDto feedDto);
 
-    List<Feed> findAllbyLoginId(String loginId);
+    List<ReadFeedDto> findAllbyLoginId(String loginId);
 
     Feed findFeedId(Long feedId);
 }

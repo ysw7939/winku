@@ -89,7 +89,7 @@ public class MemoryFeedRepository implements FeedRepository {
     }
 
     @Override
-    public List<Feed> findAllbyLoginId(String loginId) {
+    public List<ReadFeedDto> findAllbyLoginId(String loginId) {
         List<Feed> feedStoreList = new ArrayList<>(store.values());
         List<Feed> feedList = new ArrayList<>();
         for (Feed feed : feedStoreList) {
@@ -97,7 +97,13 @@ public class MemoryFeedRepository implements FeedRepository {
                 feedList.add(feed);
             }
         }
-        return feedList;
+        List<ReadFeedDto> readFeedDtoList = new ArrayList<>();
+        for (Feed feed : feedList) {
+            ReadFeedDto readFeedDto = new ReadFeedDto(feed.getId(),feed.getLoginId(), feed.getDate(), feed.getName(), feed.getProfile(), feed.getImgPath(), feed.getContent(), feed.getViews(), feed.getLikes(), feed.getDislike(), feed.getComments());
+            readFeedDtoList.add(readFeedDto);
+        }
+
+        return readFeedDtoList;
     }
 
     @Override

@@ -11,6 +11,8 @@ public class Comment {
     private long id;
     private long feedId;
 
+    private String loginId;
+
     private Date date;
     private String userName;
     private String content;
@@ -22,8 +24,9 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(long feedId, String userName, String content, String profile) {
+    public Comment(long feedId,String loginId, String userName, String content, String profile) {
         this.feedId = feedId;
+        this.loginId = loginId;
         this.userName = userName;
         this.content = content;
         this.profile = profile;
