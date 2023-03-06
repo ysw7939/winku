@@ -50,7 +50,6 @@ public class FeedController {
 
     @PostMapping("/feed/writeFeed")
     public String feedWrite(@Validated @ModelAttribute CreateFeedDto feedDto,@RequestParam String redirect, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(request.getRequestURL());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("feeds", feedService.combineReadFeedDto());
@@ -90,7 +89,7 @@ public class FeedController {
     @PostMapping("/feed/deleteRecomment")
     public String RecommentDelete(@ModelAttribute DeleteRecommentDto recommentDto) {
         recommentService.deleteRecomment(recommentDto);
-        System.out.println();
+
         return "redirect:/feed/index";
     }
 
