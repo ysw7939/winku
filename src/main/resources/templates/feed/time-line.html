@@ -677,6 +677,11 @@
 										</div>
 									</div><!-- add post new box -->
 									<div class="central-meta item" th:each="feed: ${myfeed}">
+										<form method="post" th:action="@{/feed/deleteFeed}">
+											<input type="hidden" name="id" th:value="${feed.id}">
+											<input type="hidden" name="redirect" th:value="'/feed/' + ${session.user.loginId} + '/mypage'">
+											<button type="submit" class="x-button">X</button>
+										</form>
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>

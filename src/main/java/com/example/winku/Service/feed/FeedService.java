@@ -19,4 +19,6 @@ public interface FeedService {
     void deleteFeed(DeleteFeedDto feedDto);
 
     List<Feed> findAllbyLoginId(String loginId);
+
+    Feed findFeedId(Long feedId);
 }

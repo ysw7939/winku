@@ -64,4 +64,9 @@ public class FeedServiceImpl implements FeedService {
     public List<Feed> findAllbyLoginId(String loginId) {
         return feedRepository.findAllbyLoginId(loginId);
     }
+
+    @Override
+    public Feed findFeedId(Long feedId) {
+        return feedRepository.findFeedId(feedId);
+    }
 }

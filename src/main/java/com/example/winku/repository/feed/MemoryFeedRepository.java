@@ -76,7 +76,7 @@ public class MemoryFeedRepository implements FeedRepository {
         List<Feed> feedList = new ArrayList<>(store.values());
         List<ReadFeedDto> readFeedDtoList = new ArrayList<>();
         for (Feed feed : feedList) {
-            ReadFeedDto readFeedDto = new ReadFeedDto(feed.getId(), feed.getDate(), feed.getName(), feed.getProfile(), feed.getImgPath(), feed.getContent(), feed.getViews(), feed.getLikes(), feed.getDislike(), feed.getComments());
+            ReadFeedDto readFeedDto = new ReadFeedDto(feed.getId(),feed.getLoginId(), feed.getDate(), feed.getName(), feed.getProfile(), feed.getImgPath(), feed.getContent(), feed.getViews(), feed.getLikes(), feed.getDislike(), feed.getComments());
             readFeedDtoList.add(readFeedDto);
         }
 
@@ -98,6 +98,12 @@ public class MemoryFeedRepository implements FeedRepository {
             }
         }
         return feedList;
+    }
+
+    @Override
+    public Feed findFeedId(Long feedId) {
+        Feed feed = store.get(feedId);
+        return feed;
     }
 
     @Override

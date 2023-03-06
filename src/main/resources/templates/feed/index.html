@@ -607,8 +607,10 @@
 								</div><!-- add post new box -->
 								<div class="loadMore">
 								<div class="central-meta item" th:each="feed: ${feeds}" >
-									<form method="post" th:action="@{/feed/deleteFeed}">
+									<form th:if="${feed.loginId} == ${session.user.loginId}" method="post" th:action="@{/feed/deleteFeed}">
 										<input type="hidden" name="id" th:value="${feed.id}">
+										<input type="hidden" name="id" th:value="${feed.id}">
+										<input type="hidden" name="redirect" value="/feed/index">
 										<button type="submit" class="x-button">X</button>
 									</form>
 									<div class="user-post">
@@ -703,6 +705,7 @@
 													<div class="we-comment">
 														<form method="post" th:action="@{/feed/deleteComment}">
 															<input type="hidden" name="id" th:value="${comment.id}">
+															<input type="hidden" name="redirect" value="/feed/index">
 															<button type="submit" class="x-button">X</button>
 														</form>
 														<div class="coment-head">

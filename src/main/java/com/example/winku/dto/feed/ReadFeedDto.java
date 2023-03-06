@@ -10,6 +10,7 @@ import java.util.List;
 @Getter @Setter
 public class ReadFeedDto {
     private long id;
+    private String loginId;
     private Date date;
     private String name;
     private String profile;
@@ -25,8 +26,9 @@ public class ReadFeedDto {
     public ReadFeedDto() {
     }
 
-    public ReadFeedDto(long id, Date date, String name, String profile, String imgPath, String content, int views, int likes, int dislike, int comments) {
+    public ReadFeedDto(long id,String loginId, Date date, String name, String profile, String imgPath, String content, int views, int likes, int dislike, int comments) {
         this.id = id;
+        this.loginId = loginId;
         this.date = date;
         this.name = name;
         this.profile = profile;

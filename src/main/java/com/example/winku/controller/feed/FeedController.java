@@ -74,9 +74,12 @@ public class FeedController {
     }
 
     @PostMapping("/feed/deleteFeed")
-    public String feedDelete(@ModelAttribute DeleteFeedDto feedDto) {
+    public String feedDelete(@ModelAttribute DeleteFeedDto feedDto, @SessionAttribute(name = "user") User user, @RequestParam String redirect) {
+        if (!feedService.findFeedId(feedDto.getId()).getLoginId().equals(user.getLoginId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
         feedService.deleteFeed(feedDto);
-        return "redirect:/feed/index";
+        return "redirect:" + redirect;
     }
 
     @PostMapping("/feed/deleteComment")
