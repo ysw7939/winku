@@ -1,6 +1,7 @@
 package com.example.winku.Service.user;
 
 import com.example.winku.domain.user.User;
+import com.example.winku.dto.user.ProfileDto;
 import com.example.winku.dto.user.SignInDto;
 import com.example.winku.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUserByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    @Override
+    public void profilUpdate(ProfileDto profileDto) {
+        userRepository.profileUpdate(profileDto);
     }
 
 }

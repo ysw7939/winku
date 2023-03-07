@@ -1,6 +1,7 @@
 package com.example.winku.Service.user;
 
 import com.example.winku.domain.user.User;
+import com.example.winku.dto.user.ProfileDto;
 import com.example.winku.dto.user.SignInDto;
 
 import java.util.Optional;
@@ -15,4 +16,5 @@ public interface UserService {
 
     Optional<User> findUserByName(String name);
 
+    void profilUpdate(ProfileDto profileDto);
 }

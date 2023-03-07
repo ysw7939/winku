@@ -443,12 +443,15 @@
 				<span>1205 followers</span>
 				<a href="#" title="" data-ripple="">Add Friend</a>
 			</div>
-			<form class="edit-phto">
+			<form method="post" th:action="@{/user/profileUpdate}" class="edit-phto" enctype="multipart/form-data">
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
 					Edit Cover Photo
-					<input type="file"/>
+					<input type="file" name="profileImg"/>
+					<input type="hidden" name="userId" th:value="${session.user.id}">
+					<input type="hidden" name="redirect" th:value="'/feed/'+${session.user.loginId}+'/mypage'">
 				</label>
+				<button type="submit"></button>
 			</form>
 			<div class="container-fluid">
 				<div class="row merged">

@@ -1,6 +1,7 @@
 package com.example.winku.repository.user;
 
 import com.example.winku.domain.user.User;
+import com.example.winku.dto.user.ProfileDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 @Repository
 public class MemoryUserRepository implements UserRepository {
-    @Value("${file.dir}")
+    @Value("${file.repository}")
     private String fileDir;
 
     private static final Map<String, User> store = new HashMap<>();
@@ -53,9 +54,16 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public void update(String id, User user) {
-        store.put(id, user);
+    public void profileUpdate(ProfileDto profileDto) {
+        String imgPath = null;
+        try {
+            imgPath = storeFile(profileDto.getProfileImg());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        store.get(profileDto.getUserId()).setProfileImg(imgPath);
     }
+
 
     @Override
     public void delete(String id) {

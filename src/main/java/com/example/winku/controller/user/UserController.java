@@ -2,6 +2,7 @@ package com.example.winku.controller.user;
 
 import com.example.winku.Service.user.UserService;
 import com.example.winku.domain.user.User;
+import com.example.winku.dto.user.ProfileDto;
 import com.example.winku.dto.user.RegisterDto;
 import com.example.winku.dto.user.SignInDto;
 import jakarta.annotation.Nullable;
@@ -92,11 +93,19 @@ public class UserController {
         }
         return "redirect:/user/landing";
     }
+    @PostMapping("/profileUpdate")
+    public String profileUpdate(@ModelAttribute ProfileDto profileDto, @RequestParam String redirect) {
+        userService.profilUpdate(profileDto);
+        return "redirect:" + redirect;
+    }
+
 
     @PostConstruct
     public void init() {
         userService.signUp(new User("test", "test", "test", "test@naver.com", "Male"));
+        userService.signUp(new User("asd", "asd", "asd", "test@naver.com", "Male"));
     }
+
 
 
 }
