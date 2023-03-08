@@ -25,15 +25,15 @@ public class CommentController {
         this.recommentService = recommentService;
     }
     @PostMapping("/feed/writeComment")
-    public String commentWrite(@ModelAttribute CreateCommentDto commentDto) {
+    public String commentWrite(@ModelAttribute CreateCommentDto commentDto, @RequestParam String redirect) {
         commentService.createComment(commentDto);
-        return "redirect:/feed/index";
+        return "redirect:" + redirect;
     }
 
     @PostMapping("/feed/writeRecomment")
-    public String RecommentWrite(@ModelAttribute CreateRecommentDto recommentDto) {
+    public String RecommentWrite(@ModelAttribute CreateRecommentDto recommentDto, @RequestParam String redirect) {
         recommentService.createRecomment(recommentDto);
-        return "redirect:/feed/index";
+        return "redirect:" + redirect;
     }
 
     @PostMapping("/feed/deleteComment")
