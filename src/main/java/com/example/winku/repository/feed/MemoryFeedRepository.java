@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-@Repository
 public class MemoryFeedRepository implements FeedRepository {
 
     @Value("${file.repository}")
@@ -112,7 +111,6 @@ public class MemoryFeedRepository implements FeedRepository {
         return feed;
     }
 
-    @Override
     public void clearStore() {
         store.clear();
     }

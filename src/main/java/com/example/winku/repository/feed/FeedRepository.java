@@ -14,8 +14,6 @@ public interface FeedRepository {
     Feed createFeed(CreateFeedDto feedDto);
     List<Feed> findAll();
 
-    void clearStore();
-
     List<ReadFeedDto> injectFeedIntoDto();
 
     void deleteFeed(DeleteFeedDto feedDto);
