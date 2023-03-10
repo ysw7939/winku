@@ -7,7 +7,7 @@ import com.example.winku.repository.feed.FeedRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-@Repository
+
 public class MemoryCommentRepository implements CommentRepository{
     public static final Map<Long,Comment> store = new HashMap<>();
     private final FeedRepository feedRepository;

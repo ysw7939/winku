@@ -102,7 +102,7 @@ public class JdbcTemplateFeedRepository implements FeedRepository{
 
     @Override
     public void deleteFeed(DeleteFeedDto feedDto) {
-        String sql = "delete form feed where id=:id";
+        String sql = "delete from feed where id=:id";
         MapSqlParameterSource param = new MapSqlParameterSource()
                 .addValue("id", feedDto.getId());
         jdbcTemplate.update(sql, param);

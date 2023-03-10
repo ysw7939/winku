@@ -89,8 +89,6 @@ public class FeedController {
 
     @PostConstruct
     public void init() {
-        feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
-        feedService.saveFeed(new Feed("test","양수원", "friend-avatar10.jpg","user-post.jpg","내용들 입니다."));
         commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
         commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
         commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));

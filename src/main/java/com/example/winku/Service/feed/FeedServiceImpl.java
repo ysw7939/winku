@@ -2,7 +2,9 @@ package com.example.winku.Service.feed;
 
 import com.example.winku.Service.comment.CommentService;
 import com.example.winku.Service.comment.CommentServiceImpl;
+import com.example.winku.Service.recomment.RecommentService;
 import com.example.winku.domain.comment.Comment;
+import com.example.winku.domain.comment.Recomment;
 import com.example.winku.domain.feed.Feed;
 import com.example.winku.dto.comment.DeleteCommentDto;
 import com.example.winku.dto.feed.CreateFeedDto;
@@ -18,11 +20,16 @@ import java.util.List;
 public class FeedServiceImpl implements FeedService {
     private final FeedRepository feedRepository;
     private final CommentService commentService;
+    private final RecommentService recommentService;
+
     @Autowired
-    public FeedServiceImpl(FeedRepository feedRepository, CommentService commentService) {
+    public FeedServiceImpl(FeedRepository feedRepository, CommentService commentService, RecommentService recommentService) {
         this.feedRepository = feedRepository;
         this.commentService = commentService;
+        this.recommentService = recommentService;
     }
+
+
 
     @Override
     public List<Feed> findFeeds() {
@@ -46,7 +53,12 @@ public class FeedServiceImpl implements FeedService {
 
 
         for (ReadFeedDto readFeedDto : dtoList) {
-            readFeedDto.setCommentList(commentService.findAllbyFeedId(readFeedDto.getId()));
+            List<Comment> commentList = new ArrayList<>();
+            for (Comment comment : commentService.findAllbyFeedId(readFeedDto.getId())) {
+                comment.setRecommentList(recommentService.findAllbyCommentId(comment.getId()));
+                commentList.add(comment);
+            }
+            readFeedDto.setCommentList(commentList);
         }
         return dtoList;
     }
