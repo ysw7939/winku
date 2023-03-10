@@ -12,12 +12,9 @@ public interface UserRepository {
 
     Optional<User> findByLoginId(String loginId);
 
-    Optional<User> findByName(String name);
-
     void profileUpdate(ProfileDto profileDto);
 
     void delete(String id);
 
-    void clearStore();
 
 }

@@ -44,10 +44,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLoginId(loginId);
     }
 
-    @Override
-    public Optional<User> findUserByName(String name) {
-        return userRepository.findByName(name);
-    }
+
 
     @Override
     public void profilUpdate(ProfileDto profileDto) {

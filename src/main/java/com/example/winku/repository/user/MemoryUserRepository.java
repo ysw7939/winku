@@ -46,12 +46,7 @@ public class MemoryUserRepository implements UserRepository {
                 .findAny();
     }
 
-    @Override
-    public Optional<User> findByName(String name) {
-        return store.values().stream()
-                .filter(user -> user.getName().equals(name))
-                .findAny();
-    }
+
 
     @Override
     public void profileUpdate(ProfileDto profileDto) {
@@ -70,7 +65,7 @@ public class MemoryUserRepository implements UserRepository {
         store.remove(id);
     }
 
-    @Override
+
     public void clearStore() {
         store.clear();
     }

@@ -111,7 +111,7 @@ public class JdbcTemplateFeedRepository implements FeedRepository{
 
     @Override
     public List<ReadFeedDto> findAllbyLoginId(String loginId) {
-        String sql = "select * from feed where loginId = :loginId";
+        String sql = "select * from feed where login_id = :loginId";
         MapSqlParameterSource param = new MapSqlParameterSource()
                 .addValue("loginId", loginId);
         List<Feed> FeedList = jdbcTemplate.query(sql, param,feedRowMapper());
