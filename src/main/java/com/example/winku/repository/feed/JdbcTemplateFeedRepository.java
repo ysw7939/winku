@@ -90,7 +90,14 @@ public class JdbcTemplateFeedRepository implements FeedRepository{
 
     @Override
     public List<ReadFeedDto> injectFeedIntoDto() {
-        return null;
+        String sql = "select * from feed";
+        List<Feed> feedList = jdbcTemplate.query(sql, feedRowMapper());
+        List<ReadFeedDto> readFeedDtoList = new ArrayList<>();
+        for (Feed feed : feedList) {
+            ReadFeedDto readFeedDto = new ReadFeedDto(feed.getId(),feed.getLoginId(), feed.getDate(), feed.getName(), feed.getProfile(), feed.getImgPath(), feed.getContent(), feed.getViews(), feed.getLikes(), feed.getDislike(), feed.getComments());
+            readFeedDtoList.add(readFeedDto);
+        }
+        return readFeedDtoList;
     }
 
     @Override
@@ -122,7 +129,6 @@ public class JdbcTemplateFeedRepository implements FeedRepository{
         String sql = "select * from feed where id = :id";
         MapSqlParameterSource param = new MapSqlParameterSource()
                 .addValue("id", feedId);
-
         Feed feed = jdbcTemplate.queryForObject(sql, param, feedRowMapper());
         return feed;
 
