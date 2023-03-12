@@ -17,12 +17,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Repository
 public class JdbcTemplateCommentRepository implements CommentRepository{
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert jdbcInsert;
+
+    private Date date = new Date();
 
     public JdbcTemplateCommentRepository(DataSource dataSource) {
         jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -31,13 +34,15 @@ public class JdbcTemplateCommentRepository implements CommentRepository{
 
     @Override
     public Comment save(Comment comment) {
-        String sql = "insert into comment (feed_id, login_id, user_name, content, profile) values (:feed_id, :login_id, :user_name, :content, :profile)";
+        comment.setDate(date);
+        String sql = "insert into comment (feed_id, login_id, user_name, content, profile ,date) values (:feed_id, :login_id, :user_name, :content, :profile, :date)";
         MapSqlParameterSource param = new MapSqlParameterSource()
                 .addValue("feed_id", comment.getFeedId())
                 .addValue("login_id", comment.getLoginId())
                 .addValue("user_name", comment.getUserName())
                 .addValue("content",comment.getContent())
-                .addValue("profile", comment.getProfile());
+                .addValue("profile", comment.getProfile())
+                .addValue("date", comment.getDate());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(sql, param, keyHolder);
         comment.setId(keyHolder.getKey().longValue());
@@ -70,14 +75,16 @@ public class JdbcTemplateCommentRepository implements CommentRepository{
 
     @Override
     public Comment createComment(CreateCommentDto commentDto) {
-        Comment comment = new Comment(commentDto.getFeedId(),commentDto.getLoginId(), commentDto.getUserName(), commentDto.getContent(), commentDto.getProfile());
-        String sql = "insert into comment (feed_id, login_id, user_name, content, profile) values (:feed_id, :login_id, :user_name, :content, :profile)";
+        Comment comment = new Comment(commentDto.getFeedId(), commentDto.getLoginId(), commentDto.getUserName(), commentDto.getContent(), commentDto.getProfile());
+        comment.setDate(date);
+        String sql = "insert into comment (feed_id, login_id, user_name, content, profile, date) values (:feed_id, :login_id, :user_name, :content, :profile, :date)";
         MapSqlParameterSource param = new MapSqlParameterSource()
                 .addValue("feed_id", comment.getFeedId())
                 .addValue("login_id", comment.getLoginId())
                 .addValue("user_name", comment.getUserName())
                 .addValue("content", comment.getContent())
-                .addValue("profile", comment.getProfile());
+                .addValue("profile", comment.getProfile())
+                .addValue("date", comment.getDate());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(sql, param, keyHolder);
         comment.setId(keyHolder.getKey().longValue());

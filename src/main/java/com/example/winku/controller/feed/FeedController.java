@@ -87,18 +87,5 @@ public class FeedController {
 
     }
 
-    @PostConstruct
-    public void init() {
-        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(1L, "test","양수원", "내용", "friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(2L, "test","양수원", "내용", "friend-avatar10.jpg"));
-        commentService.saveComment(new Comment(2L, "test","양수원", "내용", "friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(1L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(1L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(2L, "test","대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
-        recommentService.saveRecomment(new Recomment(3L,"test", "대댓글 내용입니다!!!!!!!!!", "양수원", "friend-avatar10.jpg"));
-    }
-
 
 }

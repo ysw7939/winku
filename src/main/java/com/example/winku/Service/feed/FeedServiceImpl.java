@@ -77,7 +77,12 @@ public class FeedServiceImpl implements FeedService {
         List<ReadFeedDto> dtoList = feedRepository.findAllbyLoginId(loginId);
 
         for (ReadFeedDto readFeedDto : dtoList) {
-            readFeedDto.setCommentList(commentService.findAllbyFeedId(readFeedDto.getId()));
+            List<Comment> commentList = new ArrayList<>();
+            for (Comment comment : commentService.findAllbyFeedId(readFeedDto.getId())) {
+                comment.setRecommentList(recommentService.findAllbyCommentId(comment.getId()));
+                commentList.add(comment);
+            }
+            readFeedDto.setCommentList(commentList);
         }
         return dtoList;
     }
